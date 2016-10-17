@@ -35,16 +35,16 @@ CREATE TABLE tbl_data
 	iodc                 VARCHAR(20) NULL,
 	transmission_time    VARCHAR(20) NULL,
 	interval1            VARCHAR(20) NULL,
-	date                 TIME NOT NULL,
+	yyyymmdd             DATE NOT NULL,
 	satellite_prn_number INTEGER NOT NULL
 );
 
 ALTER TABLE tbl_data
-ADD CONSTRAINT XPKtbl_data PRIMARY KEY (epoch,date,satellite_prn_number);
+ADD CONSTRAINT XPKtbl_data PRIMARY KEY (epoch,yyyymmdd,satellite_prn_number);
 
 CREATE TABLE tbl_header
 (
-	date                 TIME NOT NULL,
+	yyyymmdd             DATE NOT NULL,
 	version              VARCHAR(20) NULL,
 	ion_beta             DOUBLE PRECISION NULL,
 	a0_polynomial_term   DOUBLE PRECISION NULL,
@@ -56,7 +56,7 @@ CREATE TABLE tbl_header
 );
 
 ALTER TABLE tbl_header
-ADD CONSTRAINT XPKtbl_header PRIMARY KEY (date);
+ADD CONSTRAINT XPKtbl_header PRIMARY KEY (yyyymmdd);
 
 ALTER TABLE tbl_data
-ADD CONSTRAINT R_2 FOREIGN KEY (date) REFERENCES tbl_header (date);
+ADD CONSTRAINT R_2 FOREIGN KEY (yyyymmdd) REFERENCES tbl_header (yyyymmdd);
